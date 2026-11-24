@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-4 py-4">Tasks Pending</h1>
+            <ul class="list-group shadow-sm">
+                {% for task in tasks %}
+                    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center {% if task.important %}list-group-item-warning{% endif %}" href="{% url 'task_detail' task.id %}">
+                        <div>
+                            <header class="d-flex justify-content-between">
+                                <h5 class="fw-bold {% if task.important %}text-danger{% endif %}">{{ task.title }}</h5>
+                            </header>
+                            <p class="mb-1 text-muted">{{ task.description|truncatewords:20 }}</p>
+                            <small class="text-secondary">{{ task.created|date:'M d Y - H:i' }}</small>
+                        </div>
+                        {% if task.important %}
+                            <span class="badge bg-danger rounded-pill">Important</span>
+                        {% endif %}
+                    </a>
+                {% empty %}
+                    <li class="list-group-item text-center py-4 text-muted">
+                        No pending tasks. <a href="{% url 'create_task' %}">Create one here!</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
+{% endblock %}

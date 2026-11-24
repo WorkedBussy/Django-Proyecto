@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container py-5">
+    <section class="card card-body text-center p-5 shadow-sm bg-white rounded">
+        <h1 class="display-4 fw-bold">Django App CRUD & Auth</h1>
+        <p class="lead mt-3 text-muted">
+            Bienvenido a la aplicación de gestión de tareas desarrollada con Django y estilizada con Bootstrap.
+            Administra tus tareas pendientes, márcalas como completadas y mantén el control de tus actividades diarias.
+        </p>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            {% if user.is_authenticated %}
+                <a href="{% url 'tasks' %}" class="btn btn-primary btn-lg">Ver mis Tareas</a>
+                <a href="{% url 'create_task' %}" class="btn btn-outline-secondary btn-lg">Crear Nueva Tarea</a>
+            {% else %}
+                <a href="{% url 'signin' %}" class="btn btn-secondary btn-lg">Iniciar Sesión</a>
+                <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Registrarse</a>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,17 @@
+# Python / Django
+venv/
+.venv/
+*.pyc
+__pycache__/
+db.sqlite3
+*.log
+.env
+staticfiles/
+
+# System / IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos temporales locales
+taller81_pasos.txt

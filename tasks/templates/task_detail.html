@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <div class="card card-body shadow-sm">
+                <h1 class="text-center mb-4">Task Detail</h1>
+
+                {{ error }}
+                {% if error %}
+                    <p class="alert alert-danger">{{ error }}</p>
+                {% endif %}
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary w-100 mb-2">
+                        Update
+                    </button>
+                </form>
+
+                <div class="d-flex gap-2 mt-2">
+                    {% if not task.datecompleted %}
+                        <form action="{% url 'complete_task' task.id %}" method="POST" class="flex-fill">
+                            {% csrf_token %}
+                            <button class="btn btn-success w-100">
+                                Complete
+                            </button>
+                        </form>
+                    {% endif %}
+                    <form action="{% url 'delete_task' task.id %}" method="POST" class="flex-fill">
+                        {% csrf_token %}
+                        <button class="btn btn-danger w-100">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
